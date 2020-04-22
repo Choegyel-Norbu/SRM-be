@@ -9,13 +9,22 @@ module.exports = {
       params.phone,
       params.name
     ],
-
     (error, results, fields) => {
       if (!error)
         return callback(error, results);
       else
         return callback(error);
     });
+  },
+
+  getUser: callback =>{
+    db.query('SELECT id, name, email, phone FROM student_table',
+     (err, result, fields)=> {
+      if(!err)
+        return callback(err, result);
+      else
+        return callback(err, null);
+    })
   },
 
 userAuth: (params, callback) => {

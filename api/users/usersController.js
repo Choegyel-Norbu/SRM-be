@@ -1,4 +1,4 @@
-const { create, userAuth } = require('./usersService');
+const { create, userAuth, getUser } = require('./usersService');
 const {genSaltSync, hashSync, compareSync } = require('bcrypt');
 const {sign} = require('jsonwebtoken');
 
@@ -12,6 +12,15 @@ module.exports = {
         return res.json({message: 'Success'});
       }
       return res.json({message: error});
+    });
+  },
+
+  get_user: (req, res) => {
+    getUser((error, result)=> {
+      if(!error)
+        return res.json(result)
+      else
+        return res.json(error)
     });
   },
 
